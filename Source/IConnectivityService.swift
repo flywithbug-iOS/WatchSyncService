@@ -10,6 +10,6 @@ import Foundation
 
 public protocol IConnectivityService {
     func run()
-    func send(item: ISyncItem)
+    func send(item: ISyncItem,completion:((Bool)->Void)?)
     func onReceive(handler: @escaping (ISyncItem) -> ())
 }

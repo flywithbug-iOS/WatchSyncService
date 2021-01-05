@@ -10,6 +10,7 @@ import Foundation
 import WatchConnectivity
 
 public class WCSessionWrapper: NSObject, IConnectivityService {
+  
     var session: WCSession?
     var onReceiveHandler: (ISyncItem) -> () = {_ in }
     public var parser: IApplicationContextParser!
@@ -33,7 +34,7 @@ public class WCSessionWrapper: NSObject, IConnectivityService {
         }
     }
     
-    public func send(item: ISyncItem) {
+    public func send(item: ISyncItem,completion:((Bool)->Void)?) {
         run()
         guard let session = self.session else {
             print(self, #function, #line, "there is no session")
@@ -41,9 +42,10 @@ public class WCSessionWrapper: NSObject, IConnectivityService {
         }
         do {
             try session.updateApplicationContext(parser.encodeConextFrom(item))
-            
+            completion?(true)
         } catch let error as NSError {
             print(self, #function, #line, error.description)
+            completion?(false)
         }
     }
     

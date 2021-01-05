@@ -26,8 +26,8 @@ public class GenericSyncService: NSObject {
         connectivityService.run()
     }
     
-    public func send(_ item: ISyncItem) {
-        connectivityService?.send(item: item)
+    public func send(_ item: ISyncItem,completion:((Bool)->Void)?) {
+        connectivityService?.send(item: item,completion: completion)
     }
     
     public func onReceived<T: ISyncItem>(type: T.Type, handlerBlock: @escaping (T) -> ()) {
