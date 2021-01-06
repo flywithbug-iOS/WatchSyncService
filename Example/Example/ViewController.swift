@@ -12,7 +12,7 @@ import WatchSyncService
 class ViewController: UIViewController {
 
     @IBOutlet var label: UILabel!
-    
+    var count:Int = 0
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -27,12 +27,18 @@ class ViewController: UIViewController {
 
     @IBAction
     func buttonPingPressed() {
-        GenericSyncService.default.send(Message(text: "ping"))
+        count += 1
+        GenericSyncService.default.send(Message(text: "ping\(count)")) { (value) in
+            
+        }
     }
 
     @IBAction
     func buttonPongPressed() {
-        GenericSyncService.default.send(Message(text: "pong"))
+        count += 1
+        GenericSyncService.default.send(Message(text: "pong\(count)")) { (value) in
+            
+        }
     }
 }
 

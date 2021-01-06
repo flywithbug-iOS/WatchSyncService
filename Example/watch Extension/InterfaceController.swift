@@ -34,12 +34,18 @@ class InterfaceController: WKInterfaceController {
         // This method is called when watch view controller is no longer visible
         super.didDeactivate()
     }
-
+    var count:Int = 0
     @IBAction func pingButtonPressed() {
-        GenericSyncService.default.send(Message(text: "ping"))
+        count += 1
+        GenericSyncService.default.send(Message(text: "ping\(count)")) { (value) in
+            
+        }
     }
     
     @IBAction func pongButtonPressed() {
-        GenericSyncService.default.send(Message(text: "pong"))
+        count += 1
+        GenericSyncService.default.send(Message(text: "pong\(count)")) { (value) in
+            
+        }
     }
 }
